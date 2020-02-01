@@ -19,6 +19,7 @@ h1 {
 .greetings {
     display: none;
 }
+
 .showing{
     display : block;
 }
