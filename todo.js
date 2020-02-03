@@ -5,7 +5,18 @@ const toDoForm = document.querySelector(".js-toDoForm"),
 const TODOS_LS = 'toDos';
 
 //해야할 일을 생성했을 때 toDos array에 추가되도록 함
-const toDos = [];
+let toDos = [];
+
+function deleteTodo(event) {
+    const btn = event.target;
+    const li = btn.parentNode;
+    toDoList.removeChild(li);
+    const cleanToDos = toDos.filter(function (toDo) {
+        return toDo.id !== parseInt(li.id);
+    }); // filter : array의 모든 아이템을 통해 함수를 실행하고 true인 아이템들만 가지고 새로운 array를 만듦
+    toDos = cleanToDos; //toDos가 let이어야 됨 (const X)
+    saveToDos();
+}
 
 /*local storage는 string으로 저장하기 때문에 toDos를 string으로 바꿔줘야됨 (json)
 JSON(JavaScript Object Notation) : 데이터를 저장할 때, 자바스크립트가 데이터를 다룰 수 있도록 object로 바꿔주는 기능
@@ -21,6 +32,7 @@ function paintToDo(text) {
     const newId = toDos.length + 1;
 
     delBtn.innerText = "❌";
+    delBtn.addEventListener("click", deleteTodo);
     span.innerText = text;
     li.appendChild(span); //ex.span을 li(=father element)에 넣는 것
     li.appendChild(delBtn);
