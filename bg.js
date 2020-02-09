@@ -1,5 +1,4 @@
 const body = document.querySelector("body");
-
 const IMG_NUM = 11;
 
 function paintImage(imgNumber) {
